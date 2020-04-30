@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: Pod
+metadata:
+    name: ${POD_LABEL}
+    labels:
+        app: ${POD_LABEL}
+spec:
+    restartPolicy: Never
+    priorityClassName: high-priority
+    tolerations:
+        - key: node-role.kubernetes.io/master
+          operator: Exists
+          effect: NoSchedule
+        - key: disk-performance
+          operator: Equal
+          value: low
+          effect: NoSchedule
+    hostAliases:
+        - ip: "127.0.0.1"
+          hostnames:
+              - "php"
+
+    volumes:
+        - name: app
+          emptyDir: {}
+        - name: test-results
+          hostPath:
+              path: ${KUBERNETES_HOST_PATH}/${TESTING_TYPE}/results
+        - name: composer-home
+          hostPath:
+              path: /tmp/composer-home
+
+    containers:
+        - name: app
+          image: ${REGISTRY_HOST}/ecentria/${PROJECT_NAMESPACE}/php-7.3.7:v1
+          imagePullPolicy: Always
+          volumeMounts:
+              - name: app
+                mountPath: /var/www/app
+              - name: test-results
+                mountPath: /${TESTING_TYPE}/results
+          command:
+              - /bin/bash
+              - -c
+              - ${COMMAND}
