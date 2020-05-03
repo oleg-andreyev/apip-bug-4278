@@ -11,12 +11,7 @@
 
 namespace App\Tests\Dummy;
 
-use App\Entity\Question;
-use App\Entity\Survey;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Validator\Context\ExecutionContextInterface;
-use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 /**
  * Dummy test
