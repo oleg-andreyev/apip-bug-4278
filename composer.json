@@ -11,8 +11,8 @@
         }
     ],
     "repositories": [
-        { "type": "vcs", "url": "ssh://git@stash.dev.opticplanet.net/lib/ecentria-logging-library.git" },
-        { "type": "vcs", "url": "ssh://git@stash.dev.opticplanet.net/lib/ecentria-logging-bundle.git" }
+        { "type": "vcs", "url": "ssh://git@bitbucket.ecentria.tools/lib/ecentria-logging-bundle.git" },
+        { "type": "vcs", "url": "ssh://git@bitbucket.ecentria.tools/lib/ecentria-logging-library.git" }
     ],
     "require": {
         "php": "^7.3.0",
@@ -21,14 +21,16 @@
         "ext-json": "*",
         "api-platform/api-pack": "^1.2",
         "doctrine/doctrine-migrations-bundle": "^2.1",
-        "symfony/console": "^4.4",
-        "symfony/dotenv": "^4.4",
+        "ecentria/crontab-bundle": "^1.0",
+        "ecentria/logging-bundle": "^2.0",
+        "ecentria/logging-library": "^2.0",
+        "symfony/console": "^5.1",
+        "symfony/dotenv": "^5.1",
         "symfony/flex": "^1.3.1",
-        "symfony/framework-bundle": "^4.4",
+        "symfony/framework-bundle": "^5.1",
         "symfony/monolog-bundle": "^3.5",
-        "symfony/translation": "4.4.*",
-        "symfony/yaml": "^4.4",
-        "ecentria/logging-bundle": "^0.4.3"
+        "symfony/translation": "^5.1",
+        "symfony/yaml": "^5.1"
     },
     "require-dev": {
         "deployer/deployer": "^6.7",
@@ -36,7 +38,7 @@
         "phpunit/phpunit": "^9.0",
         "symfony/maker-bundle": "^1.14",
         "symfony/phpunit-bridge": "^5.0",
-        "symfony/process": "4.4.*"
+        "symfony/process": "^5.1"
     },
     "config": {
         "preferred-install": {
@@ -80,7 +82,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "4.4.*"
+            "require": "^5.1"
         }
     }
 }
