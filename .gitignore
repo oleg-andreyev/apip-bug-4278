@@ -1,5 +1,4 @@
 /.idea/
-/.env
 /local-setup.sh
 /behat.yml
 /composer.phar
