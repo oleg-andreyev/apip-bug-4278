@@ -30,7 +30,7 @@ for VAR in "${ENV_VARS[@]}"; do
     fi
 done
 
-POD_LABEL="${PROJECT_NAMESPACE}-${TESTING_TYPE}-${BUILD_KEY,,}"
+POD_LABEL="${TESTING_TYPE}-${BUILD_KEY,,}"
 
 # Cleanup
 ssh ${KUBERNETES_CLUSTER_USER}@${KUBERNETES_CLUSTER_HOST} "kubectl --namespace=${PROJECT_NAMESPACE} delete pod ${POD_LABEL} --force --grace-period=0 2>&1 || true"

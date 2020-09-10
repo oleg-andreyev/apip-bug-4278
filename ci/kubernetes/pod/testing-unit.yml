@@ -32,7 +32,7 @@ spec:
 
     containers:
         - name: app
-          image: ${REGISTRY_HOST}/ecentria/${PROJECT_NAMESPACE}/php-7.3.7:v1
+          image: ${REGISTRY_HOST}/${PROJECT_NAMESPACE}/php-7.3.7:latest
           imagePullPolicy: Always
           volumeMounts:
               - name: app
