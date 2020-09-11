@@ -31,7 +31,7 @@ for VAR in "${ENV_VARS[@]}"; do
     fi
 done
 
-POD_LABEL="${PROJECT_NAMESPACE}-${TESTING_TYPE}-${BUILD_KEY,,}"
+POD_LABEL="${TESTING_TYPE}-${BUILD_KEY,,}"
 POD_FILENAME="testing-unit.yml"
 
 COMMAND="cd /var/www/app"
@@ -49,6 +49,7 @@ ENV_VARIABLES="POD_LABEL=\"${POD_LABEL}\""
 ENV_VARIABLES+=" KUBERNETES_HOST_PATH=\"/tmp/${BUILD_KEY}\""
 ENV_VARIABLES+=" TESTING_TYPE=\"${TESTING_TYPE}\""
 ENV_VARIABLES+=" REGISTRY_HOST=\"${REGISTRY_HOST}\""
+ENV_VARIABLES+=" PROJECT_NAMESPACE=\"${PROJECT_NAMESPACE}\""
 ENV_VARIABLES+=" COMMAND=\"${COMMAND}\""
 
 echo ">>> Preparing Kubernetes environment..."
@@ -92,6 +93,8 @@ rm -rf ${ROOT_DIR}/test-reports \
     && scp -r \
     ${KUBERNETES_CLUSTER_USER}@${BUILD_HOST}.usgroup.loc:/tmp/${BUILD_KEY}/${TESTING_TYPE}/results/. \
     ${ROOT_DIR}/test-reports/${TESTING_TYPE}
+# TODO: Remove this line after configuration is finished
+echo ">>> Debug: Test results downloaded to ${ROOT_DIR}/test-reports/${TESTING_TYPE}"
 
 echo -e "\n>>> Checking Pod exit code..\n"
 for ((i=0; i<10; i++)); do
