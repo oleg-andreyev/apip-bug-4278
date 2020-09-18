@@ -2,18 +2,12 @@ apiVersion: v1
 kind: Pod
 metadata:
     name: ${POD_LABEL}
-    labels:
-        app: ${POD_LABEL}
 spec:
     restartPolicy: Never
     priorityClassName: high-priority
     tolerations:
         - key: node-role.kubernetes.io/master
           operator: Exists
-          effect: NoSchedule
-        - key: disk-performance
-          operator: Equal
-          value: low
           effect: NoSchedule
     hostAliases:
         - ip: "127.0.0.1"
@@ -23,22 +17,30 @@ spec:
     volumes:
         - name: app
           emptyDir: {}
-        - name: test-results
-          hostPath:
-              path: ${KUBERNETES_HOST_PATH}/${TESTING_TYPE}/results
         - name: composer-home
           hostPath:
-              path: /tmp/composer-home
+              path: /home/dev/.composer
+        - name: minio-cli
+          hostPath:
+            path: ${MINIO_PATH_TO_BINARY}
+        - name: minio-config-dir
+          hostPath:
+            path: ${MINIO_PATH_CONFIG_DIR}
 
     containers:
         - name: app
-          image: ${REGISTRY_HOST}/${PROJECT_NAMESPACE}/php-7.3.7:latest
+          image: ${REGISTRY_HOST}/${PROJECT_NAME}/php-fpm:v1
           imagePullPolicy: Always
           volumeMounts:
               - name: app
                 mountPath: /var/www/app
-              - name: test-results
-                mountPath: /${TESTING_TYPE}/results
+              - name: minio-cli
+                mountPath: ${MINIO_PATH_TO_BINARY}
+                readOnly: true
+              - name: minio-config-dir
+                mountPath: /root/.minio_cli/
+              - name: composer-home
+                mountPath: /root/.composer
           command:
               - /bin/bash
               - -c

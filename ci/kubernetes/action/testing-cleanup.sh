@@ -18,8 +18,6 @@ echo ">>> Cleaning up Kubernetes cluster..."
 # Validate needed values
 declare -a ENV_VARS=(
     "BUILD_KEY"
-    "KUBERNETES_CLUSTER_USER"
-    "KUBERNETES_CLUSTER_HOST"
     "TESTING_TYPE"
 )
 
@@ -33,6 +31,5 @@ done
 POD_LABEL="${TESTING_TYPE}-${BUILD_KEY,,}"
 
 # Cleanup
-ssh ${KUBERNETES_CLUSTER_USER}@${KUBERNETES_CLUSTER_HOST} "kubectl --namespace=${PROJECT_NAMESPACE} delete pod ${POD_LABEL} --force --grace-period=0 2>&1 || true"
-
-exit $?
+kubectl --namespace="${PROJECT_NAMESPACE}" delete pod ${POD_LABEL} --force --grace-period=0 2>&1;
+minio_cli rm -r --force "build-artifacts/build-artifacts/${BUILD_KEY}/${TESTING_TYPE}"
