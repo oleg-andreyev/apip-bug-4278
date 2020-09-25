@@ -39,4 +39,17 @@ where your tests will be run in. In order to create your kubernetes namespace
 visit https://rancher.ecentria.tools/. Contact **Chuck Norris** team for any questions
 related to Kubernetes.
 
+Environment variables
+---
+As of Symfony 5.1:
+- use `.env.local` for generic overrides on machine (local, remote)
+- use `.env.<environment>` (commit to repo) for specific environment vars 
+- use `.env.<environment>.local` for specific environment overrides
 
+For more details see: 
+- https://symfony.com/doc/current/configuration.html#configuring-environment-variables-in-env-files
+- https://symfony.com/doc/current/configuration/dot-env-changes.html
+
+*Note*: 
+- Do not commit `*.local` files
+- Do not generate `.env.local.php` if you want to change env vars with puppet on the go (w/o deployment)
