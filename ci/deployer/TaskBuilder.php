@@ -133,6 +133,20 @@ final class TaskBuilder
     }
 
     /**
+     * Get symlink from <env_file_path> to <current> callback
+     */
+    public static function buildSymlinkEnvFileCallback(): \Closure
+    {
+        return function () {
+            $env_file_path = Application::KEY_ENV_PATH;
+            $releasePath = Application::KEY_RELEASE_PATH;
+            run(
+                "ln -s {{{$env_file_path}}}/.env.local {{{$releasePath}}}/.env.local"
+            );
+        };
+    }
+
+    /**
      * Clear multi line command
      *
      * @param string $command

@@ -25,6 +25,7 @@ final class Application
     const KEY_DEPLOY_PATH = 'deploy_path';
     const KEY_EXECUTE_MIGRATIONS = 'execute_migrations';
     const KEY_BRANCH = 'branch';
+    const KEY_ENV_PATH = 'env_file_path';
 
     /**
      * Build
@@ -64,6 +65,8 @@ final class Application
      */
     private static function registerTasks()
     {
+        set('shared_files', []); // We do not want obsolete env files symlinked from default symfony recipes
+
         /**
          * Custom made
          */
@@ -72,6 +75,7 @@ final class Application
         task('custom:clear_opcache', TaskBuilder::buildClearOpCacheCallback())->setPrivate();
         task('custom:phpfpm:reload', TaskBuilder::buildPhpFpmRestartCallback())->setPrivate();
         task('custom:migrations', TaskBuilder::buildDatabaseMigrationCallback())->once()->setPrivate();
+        task('custom:symlink-env', TaskBuilder::buildSymlinkEnvFileCallback())->once()->setPrivate();
 
         /**
          * Overrides
@@ -89,6 +93,7 @@ final class Application
         before('deploy', 'custom:setup');
 
         after('deploy:failed', 'deploy:unlock');
+        before('deploy:vendors', 'custom:symlink-env');
         after('deploy:vendors', 'custom:cached_copy_update');
         after('deploy:vendors', 'custom:migrations');
 
