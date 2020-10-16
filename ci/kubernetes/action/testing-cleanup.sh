@@ -31,5 +31,5 @@ done
 POD_LABEL="${TESTING_TYPE}-${BUILD_KEY,,}"
 
 # Cleanup
-kubectl --namespace="${PROJECT_NAMESPACE}" delete pod ${POD_LABEL} --force --grace-period=0 2>&1;
+kubectl --namespace="${PROJECT_NAMESPACE}" delete pod ${POD_LABEL} --force --grace-period=0 2>&1 || true
 minio_cli rm -r --force "build-artifacts/build-artifacts/${BUILD_KEY}/${TESTING_TYPE}"
