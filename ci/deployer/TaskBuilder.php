@@ -114,6 +114,22 @@ final class TaskBuilder
     }
 
     /**
+     * Build shared callback
+     *
+     * @return \Closure
+     */
+    public static function buildSharedCallback(): \Closure
+    {
+        return function () {
+            $file = '.env.local';
+            $sharedPath = "{{deploy_path}}/shared";
+            if (test("[ -f $sharedPath/$file ]") && !test("[ -f {{release_path}}/$file ]")) {
+                run("{{bin/symlink}} $sharedPath/$file {{release_path}}/$file");
+            }
+        };
+    }
+
+    /**
      * Get database migration callback
      *
      * @return \Closure
@@ -126,7 +142,7 @@ final class TaskBuilder
             }
 
             run(
-                '{{bin/console}} doctrine:migrations:migrate --no-debug --allow-no-migration',
+                '{{bin/php}} {{bin/console}} doctrine:migrations:migrate --no-debug --allow-no-migration',
                 ['timeout' => 3600]
             );
         };

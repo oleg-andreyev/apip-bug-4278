@@ -64,6 +64,8 @@ final class Application
      */
     private static function registerTasks()
     {
+        set('shared_files', []); // We do not want obsolete env files symlinked from default symfony recipes
+
         /**
          * Custom made
          */
@@ -72,6 +74,7 @@ final class Application
         task('custom:clear_opcache', TaskBuilder::buildClearOpCacheCallback())->setPrivate();
         task('custom:phpfpm:reload', TaskBuilder::buildPhpFpmRestartCallback())->setPrivate();
         task('custom:migrations', TaskBuilder::buildDatabaseMigrationCallback())->once()->setPrivate();
+        task('custom:shared', TaskBuilder::buildSharedCallback())->once()->setPrivate();
 
         /**
          * Overrides
@@ -88,6 +91,7 @@ final class Application
          */
         before('deploy', 'custom:setup');
 
+        after('deploy:shared', 'custom:shared');
         after('deploy:failed', 'deploy:unlock');
         after('deploy:vendors', 'custom:cached_copy_update');
         after('deploy:vendors', 'custom:migrations');
