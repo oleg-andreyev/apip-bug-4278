@@ -41,6 +41,16 @@ related to Kubernetes.
 
 Environment variables
 ---
+
+Production: <br /><br />
+Environment variables files are usually managed by puppet.
+Deployer.phar plays a crucial role in storing and using .env.local file on production server. 
+In order to have environment files on production puppet should put .env.local file into:
+```bash
+/home/<application>/shared/.env.local
+```
+Deployer will guarantee that this file will be shared across all releases.
+
 As of Symfony 5.1:
 - use `.env.local` for generic overrides on machine (local, remote)
 - use `.env.<environment>` (commit to repo) for specific environment vars 

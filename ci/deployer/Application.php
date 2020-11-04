@@ -25,7 +25,6 @@ final class Application
     const KEY_DEPLOY_PATH = 'deploy_path';
     const KEY_EXECUTE_MIGRATIONS = 'execute_migrations';
     const KEY_BRANCH = 'branch';
-    const KEY_ENV_PATH = 'env_file_path';
 
     /**
      * Build
@@ -75,7 +74,7 @@ final class Application
         task('custom:clear_opcache', TaskBuilder::buildClearOpCacheCallback())->setPrivate();
         task('custom:phpfpm:reload', TaskBuilder::buildPhpFpmRestartCallback())->setPrivate();
         task('custom:migrations', TaskBuilder::buildDatabaseMigrationCallback())->once()->setPrivate();
-        task('custom:symlink-env', TaskBuilder::buildSymlinkEnvFileCallback())->once()->setPrivate();
+        task('custom:shared', TaskBuilder::buildSharedCallback())->once()->setPrivate();
 
         /**
          * Overrides
@@ -92,8 +91,8 @@ final class Application
          */
         before('deploy', 'custom:setup');
 
+        after('deploy:shared', 'custom:shared');
         after('deploy:failed', 'deploy:unlock');
-        before('deploy:vendors', 'custom:symlink-env');
         after('deploy:vendors', 'custom:cached_copy_update');
         after('deploy:vendors', 'custom:migrations');
 

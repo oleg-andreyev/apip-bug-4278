@@ -114,6 +114,22 @@ final class TaskBuilder
     }
 
     /**
+     * Build shared callback
+     *
+     * @return \Closure
+     */
+    public static function buildSharedCallback(): \Closure
+    {
+        return function () {
+            $file = '.env.local';
+            $sharedPath = "{{deploy_path}}/shared";
+            if (test("[ -f $sharedPath/$file ]") && !test("[ -f {{release_path}}/$file ]")) {
+                run("{{bin/symlink}} $sharedPath/$file {{release_path}}/$file");
+            }
+        };
+    }
+
+    /**
      * Get database migration callback
      *
      * @return \Closure
@@ -126,22 +142,8 @@ final class TaskBuilder
             }
 
             run(
-                '{{bin/console}} doctrine:migrations:migrate --no-debug --allow-no-migration',
+                '{{bin/php}} {{bin/console}} doctrine:migrations:migrate --no-debug --allow-no-migration',
                 ['timeout' => 3600]
-            );
-        };
-    }
-
-    /**
-     * Get symlink from <env_file_path> to <current> callback
-     */
-    public static function buildSymlinkEnvFileCallback(): \Closure
-    {
-        return function () {
-            $env_file_path = Application::KEY_ENV_PATH;
-            $releasePath = Application::KEY_RELEASE_PATH;
-            run(
-                "ln -s {{{$env_file_path}}}/.env.local {{{$releasePath}}}/.env.local"
             );
         };
     }
