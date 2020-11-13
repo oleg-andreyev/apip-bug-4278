@@ -1,4 +1,4 @@
-FROM php:7.3.7-fpm
+FROM php:7.3.22-fpm-buster
 
 RUN apt-get update -y \
     && apt-get install -y  \
@@ -10,7 +10,7 @@ RUN apt-get update -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+COPY --from=composer:1 /usr/bin/composer /usr/bin/composer
 
 RUN docker-php-ext-install pdo pdo_mysql soap pcntl bcmath sockets
 

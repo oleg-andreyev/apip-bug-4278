@@ -12,7 +12,7 @@ if [[ ! -v IMAGE ]]; then
     exit 1
 fi
 
-TAG="${REGISTRY_HOST}/${PROJECT_NAMESPACE}/${IMAGE}:${VERSION:=latest}"
+TAG="${REGISTRY_HOST}/${PROJECT_NAME}/${IMAGE}:${VERSION:=latest}"
 
 # ${IMAGE} is the path to Dockerfile (folder name)
 docker build --tag ${TAG} ${IMAGE}
