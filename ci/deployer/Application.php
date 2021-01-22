@@ -74,7 +74,7 @@ final class Application
         task('custom:clear_opcache', TaskBuilder::buildClearOpCacheCallback())->setPrivate();
         task('custom:phpfpm:reload', TaskBuilder::buildPhpFpmRestartCallback())->setPrivate();
         task('custom:migrations', TaskBuilder::buildDatabaseMigrationCallback())->once()->setPrivate();
-        task('custom:shared', TaskBuilder::buildSharedCallback())->once()->setPrivate();
+        task('custom:shared', TaskBuilder::buildSharedCallback())->setPrivate();
 
         /**
          * Overrides
