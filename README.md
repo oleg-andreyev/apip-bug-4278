@@ -30,9 +30,8 @@ Name, description, homepage, author and etc.
 Set _application\_name_, it will define an index name for your logs in Kibana.
 3. **./ci/deployer/Inventory/hosts.yml** <br>
 When production server is ready, this file should be configured
-accordingly. <hostname>, <user>, <repository> should be replaced with
-a real values.
-4. **./ci/project.sh** <br>
+accordingly. <hostname>, <user>, <repository> should be replaced with real values.
+4. **./ci/settings.sh** <br>
 Configure variables.
 _PROJECT\_NAMESPACE_ is used to differ one project from another in Kubernetes
 where your tests will be run in. In order to create your kubernetes namespace
