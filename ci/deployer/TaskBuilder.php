@@ -142,7 +142,7 @@ final class TaskBuilder
             }
 
             run(
-                '{{bin/php}} {{bin/console}} doctrine:migrations:migrate --no-debug --allow-no-migration',
+                '{{bin/console}} doctrine:migrations:migrate --no-debug --allow-no-migration',
                 ['timeout' => 3600]
             );
         };
