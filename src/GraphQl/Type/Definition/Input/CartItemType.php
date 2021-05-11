@@ -4,30 +4,36 @@
 namespace App\GraphQl\Type\Definition\Input;
 
 use ApiPlatform\Core\GraphQl\Type\Definition\TypeInterface;
+use ApiPlatform\Core\GraphQl\Type\TypesContainerInterface;
 use App\GraphQl\Type\Definition\Uuid;
 use GraphQL\Type\Definition\InputObjectType;
 use GraphQL\Type\Definition\Type;
 
 class CartItemType extends InputObjectType implements TypeInterface
 {
-    public function __construct()
+    /**
+     * @var TypesContainerInterface
+     */
+    private $typesContainer;
+
+    public function __construct(array $config, TypesContainerInterface $typesContainer)
     {
-        parent::__construct([
-            'name' => 'Input' . $this->tryInferName(),
-            'fields' => [
-                'id' => Uuid::createNamedType('InputCartItemId'),
-                'title' => Type::string()
-            ]
-        ]);
+        parent::__construct($config);
+        $this->typesContainer = $typesContainer;
     }
 
-    public static function create()
+    public function getFields(): array
     {
-        return new self();
+        $this->config['fields'] = [
+            'id' => $this->typesContainer->get('InputCartItemId'),
+            'title' => Type::string()
+        ];
+
+        return parent::getFields();
     }
 
     public function getName(): string
     {
-        return 'InputCartItem';
+        return $this->name;
     }
 }

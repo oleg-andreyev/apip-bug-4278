@@ -1,5 +1,5 @@
 api_platform:
-    title: Ecentria API Skeleton
+    title: API Skeleton
 
     graphql:
         graphql_playground:

@@ -11,12 +11,6 @@ services:
     autowire: true      # Automatically injects dependencies in your services.
     autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
-  # makes classes in src/ available to be used as services
-  # this creates a service per class whose id is the fully-qualified class name
-  App\:
-    resource: '../src/*'
-    exclude: '../src/{Type,DependencyInjection,Entity,Migrations,Tests,Error,Kernel.php}'
-
   "api_platform.graphql.resolver.stage.serialize":
     class: App\GraphQl\Resolver\Stage\SerializeStage
     arguments:
@@ -36,53 +30,93 @@ services:
     arguments: [ '@App\GraphQl\Serializer\SaveForLaterContextBuilder.inner' ]
     autoconfigure: false
 
-  App\Type\Definition\Payload\CreateFromCartSaveForLaterPayload:
+  App\GraphQl\Type\Definition\Payload\CreateFromCartSaveForLaterPayload:
     arguments:
       - "@api_platform.graphql.types_container"
     tags:
       - { name: api_platform.graphql.type }
 
-  App\Type\Definition\Input\CartType: ~
-  App\Type\Definition\Input\CartItemType: ~
-
-  App\Type\Definition\Cart.Output:
-    class: App\Type\Definition\Output\CartType
+  App\GraphQl\Type\Definition\Input\CartType.Input:
+    class: App\GraphQl\Type\Definition\Input\CartType
     arguments:
-      - name: OutputCart
-      - true
+      - { name: InputCart }
+      - "@api_platform.graphql.types_container"
+
+  App\GraphQl\Type\Definition\Input\CartItemType.Input:
+    class: App\GraphQl\Type\Definition\Input\CartItemType
+    arguments:
+      - { name: InputCartItem }
+      - "@api_platform.graphql.types_container"
+
+  App\GraphQl\Type\Definition\Output\CartType.Output:
+    class: App\GraphQl\Type\Definition\Output\CartType
+    arguments:
+      - { name: OutputCart }
       - "@api_platform.graphql.types_container"
     tags:
       - { name: api_platform.graphql.type }
 
-  App\Type\Definition\CartItem.Output:
-    class: App\Type\Definition\Output\CartItemType
+  App\GraphQl\Type\Definition\Output\CartItemType.Output:
+    class: App\GraphQl\Type\Definition\Output\CartItemType
     arguments:
-      - name: OutputCartItem
-      - true
+      - { name: OutputCartItem }
+      - "@api_platform.graphql.types_container"
     tags:
       - { name: api_platform.graphql.type }
 
-
-  App\Type\Definition\Uuid.TargetItemId:
-    class: App\Type\Definition\Uuid
+  App\GraphQl\Type\Definition\Uuid.TargetItemId:
+    class: App\GraphQl\Type\Definition\Uuid
     arguments:
-      - name: TargetItemId
+      - { name: TargetItemId }
     tags:
       - { name: api_platform.graphql.type }
 
-  App\Type\Definition\Uuid.CartItemId:
-    class: App\Type\Definition\Uuid
+  App\GraphQl\Type\Definition\Uuid.CartItemId:
+    class: App\GraphQl\Type\Definition\Uuid
     arguments:
-      - name: CartItemId
+      - { name: CartItemId }
     tags:
       - { name: api_platform.graphql.type }
 
-  App\Type\Definition\Uuid.OutputCartId:
-    class: App\Type\Definition\Uuid
+  App\GraphQl\Type\Definition\Uuid.InputCartId:
+    class: App\GraphQl\Type\Definition\Uuid
     arguments:
-      - name: OutputCartId
+      - { name: InputCartId }
     tags:
       - { name: api_platform.graphql.type }
+
+  App\GraphQl\Type\Definition\Uuid.InputCartItemId:
+    class: App\GraphQl\Type\Definition\Uuid
+    arguments:
+      - { name: InputCartItemId }
+    tags:
+      - { name: api_platform.graphql.type }
+
+  App\GraphQl\Type\Definition\Uuid.OutputCartId:
+    class: App\GraphQl\Type\Definition\Uuid
+    arguments:
+      - { name: OutputCartId }
+    tags:
+      - { name: api_platform.graphql.type }
+
+  App\GraphQl\Type\Definition\Uuid.OutputCartItemId:
+    class: App\GraphQl\Type\Definition\Uuid
+    arguments:
+      - { name: OutputCartItemId }
+    tags:
+      - { name: api_platform.graphql.type }
+
+  App\GraphQl\Resolver\CreateSaveForLaterFromCartMutationResolver:
+    class: App\GraphQl\Resolver\CreateSaveForLaterFromCartMutationResolver
+    tags:
+      - { name: "api_platform.graphql.mutation_resolver" }
+
+  # makes classes in src/ available to be used as services
+  # this creates a service per class whose id is the fully-qualified class name
+  App\:
+    resource: '../src/*'
+    exclude: '../src/{GraphQl,DependencyInjection,Entity,Migrations,Tests,Error,Kernel.php}'
+
   # controllers are imported separately to make sure services can be injected
   # as action arguments even if you don't extend any base controller class
   App\Controller\:

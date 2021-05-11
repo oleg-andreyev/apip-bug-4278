@@ -4,7 +4,7 @@
   "extensions": {
     "endpoints": {
       "Default GraphQL Endpoint": {
-        "url": "https://api-a.oleg-andreyev.exp-2.dev.ecentria.tools/api/graphql",
+        "url": "https://api-a.oleg-andreyev.exp-2.dev.ecentria.tools/api/graphql?XDEBUG_SESSION_START=1",
         "headers": {
           "user-agent": "JS GraphQL"
         },

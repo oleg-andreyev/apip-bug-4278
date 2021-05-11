@@ -1,3 +1,0 @@
-ecentria_logging:
-    application_name: ecentria-api-skeleton
-    root_dir: '%kernel.project_dir%/'

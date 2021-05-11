@@ -52,9 +52,4 @@ class Uuid extends ScalarType implements TypeInterface
     {
         return $this->name;
     }
-
-    public static function createNamedType(string $name)
-    {
-        return new self(['name' => $name]);
-    }
 }

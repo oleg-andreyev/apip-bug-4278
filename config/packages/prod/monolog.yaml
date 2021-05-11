@@ -11,14 +11,12 @@ monolog:
         nested:
             type: rotating_file
             path: '%kernel.logs_dir%/%kernel.environment%.json.log'
-            formatter: ecentria_logging.formatter
             level: info
             filename_format: '{date}-{filename}'
             max_files: 10
         console:
             type: rotating_file
             path: '%kernel.logs_dir%/%kernel.environment%.console.json.log'
-            formatter: ecentria_logging.formatter
             level: info
             filename_format: '{date}-{filename}'
             max_files: 10
