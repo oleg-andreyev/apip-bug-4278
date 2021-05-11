@@ -1,0 +1,123 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+interface MutationResponse {
+    code: Int!
+    message: String!
+    success: Boolean!
+}
+
+"A node, according to the Relay specification."
+interface Node {
+    "The id of this node."
+    id: ID!
+}
+
+interface OutputCartItem {
+    id: OutputCartItemId
+    product_id: Int
+    title: String
+    variant_id: Int
+}
+
+type CreateFromCartSaveForLaterPayload implements MutationResponse {
+    Cart: OutputCart
+    SaveForLater: [SaveForLater]
+    code: Int!
+    message: String!
+    success: Boolean!
+}
+
+type Mutation {
+    "Creating Save For Loter from Cart Object"
+    CreateFromCartSaveForLater(input: CreateFromCartSaveForLaterInput!): CreateFromCartSaveForLaterPayload
+    "Deletes a SaveForLater."
+    deleteSaveForLater(input: deleteSaveForLaterInput!): deleteSaveForLaterPayload
+}
+
+type OutputCart {
+    id: OutputCartId
+    items: [OutputCartItem]
+}
+
+type Query {
+    node(id: ID!): Node
+    saveForLaters(
+        "Returns the elements in the list that come after the specified cursor."
+        after: String,
+        "Returns the elements in the list that come before the specified cursor."
+        before: String,
+        "Returns the first n elements from the list."
+        first: Int,
+        "Returns the last n elements from the list."
+        last: Int
+    ): SaveForLaterConnection
+}
+
+type SaveForLater implements Node {
+    _id: String!
+    id: ID!
+    title: String!
+}
+
+"Connection for SaveForLater."
+type SaveForLaterConnection {
+    edges: [SaveForLaterEdge]
+    pageInfo: SaveForLaterPageInfo!
+    totalCount: Int!
+}
+
+"Edge of SaveForLater."
+type SaveForLaterEdge {
+    cursor: String!
+    node: SaveForLater
+}
+
+"Information about the current page."
+type SaveForLaterPageInfo {
+    endCursor: String
+    hasNextPage: Boolean!
+    hasPreviousPage: Boolean!
+    startCursor: String
+}
+
+type deleteSaveForLaterPayload {
+    clientMutationId: String
+    saveForLater: SaveForLater
+}
+
+input CreateFromCartSaveForLaterInput {
+    cart: InputCart!
+    clientMutationId: String
+    item_id: TargetItemId!
+}
+
+input InputCart {
+    id: InputCartId
+    items: [InputCartItem]
+}
+
+input InputCartItem {
+    id: InputCartItemId
+    title: String
+}
+
+input deleteSaveForLaterInput {
+    clientMutationId: String
+    id: ID!
+}
+
+
+scalar InputCartId
+
+scalar InputCartItemId
+
+scalar TargetItemId
+
+scalar OutputCartId
+
+scalar OutputCartItemId

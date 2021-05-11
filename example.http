@@ -1,0 +1,22 @@
+# curl 'http://api-a.oleg-andreyev.exp-2.dev.ecentria.tools/api/graphql'
+#  -H 'accept: */*'
+#  -H 'Referer: http://api-a.oleg-andreyev.exp-2.dev.ecentria.tools/api/graphql/graphql_playground'
+#  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36 Edg/90.0.818.56'
+#  -H 'content-type: application/json'
+POST http://api-a.oleg-andreyev.exp-2.dev.ecentria.tools/api/graphql
+accept: */*
+Referer: http://api-a.oleg-andreyev.exp-2.dev.ecentria.tools/api/graphql/graphql_playground
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36 Edg/90.0.818.56
+Content-Type: application/json
+
+{
+  "operationName": "SaveForLater",
+  "variables": {
+    "cart": {},
+    "item_id": "c0e95895-010d-4b8c-b761-7b71aaeb6946"
+  },
+  "query": "mutation SaveForLater($cart: InputCart!, $item_id: TargetItemId!) {\n  CreateFromCartSaveForLater(input: {cart: $cart, item_id: $item_id}) {\n    Cart {\n      id\n    }\n    SaveForLater {\n      id\n    }\n  }\n}\n"
+}
+
+###
+

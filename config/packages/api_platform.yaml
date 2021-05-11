@@ -1,6 +1,19 @@
 api_platform:
     title: Ecentria API Skeleton
-    
+
+    graphql:
+        graphql_playground:
+            enabled: true
+
+        graphiql:
+            enabled: false
+
+    # Enable the Swagger documentation and export.
+    enable_swagger: true
+
+    # Enable Swagger UI.
+    enable_swagger_ui: true
+
     mapping:
         paths: ['%kernel.project_dir%/src/Entity']
         

@@ -2,33 +2,29 @@
     "name": "ecentria/api-skeleton",
     "description": "Ecentria API Skeleton",
     "type": "project",
-    "homepage": "http://stash.dev.opticplanet.net/projects/SVC/repos/ecentria-api-skeleton",
+    "homepage": "https://bitbucket.ecentria.tools/projects/SVC/repos/ecentria-api-skeleton/browse",
     "license": "proprietary",
-    "authors": [
-        {
-            "name": "Sergey Chernecov",
-            "email": "sergey.chernecov@ecentria.com"
-        }
-    ],
     "repositories": [
         { "type": "vcs", "url": "ssh://git@bitbucket.ecentria.tools/lib/ecentria-logging-library.git" },
         { "type": "vcs", "url": "ssh://git@bitbucket.ecentria.tools/lib/ecentria-logging-bundle.git" }
     ],
     "require": {
-        "php": "^7.3.0",
+        "php": "^8.0",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-json": "*",
         "api-platform/api-pack": "^1.2",
         "doctrine/doctrine-migrations-bundle": "^2.1",
         "ecentria/logging-bundle": "^2.0",
+        "ramsey/uuid": "^4.1",
         "symfony/console": "^5.2",
         "symfony/dotenv": "^5.2",
         "symfony/flex": "^1.9.8",
         "symfony/framework-bundle": "^5.2",
         "symfony/monolog-bundle": "^3.5",
         "symfony/translation": "^5.2",
-        "symfony/yaml": "^5.2"
+        "symfony/yaml": "^5.2",
+        "webonyx/graphql-php": "^14.6"
     },
     "require-dev": {
         "deployer/deployer": "^6.7",

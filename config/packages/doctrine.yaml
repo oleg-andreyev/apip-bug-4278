@@ -1,13 +1,7 @@
 doctrine:
     dbal:
-        server_version: "%env(DATABASE_SERVER_VERSION)%"
-        host:           "%env(DATABASE_HOST)%"
-        port:           "%env(int:DATABASE_PORT)%"
-        dbname:         "%env(DATABASE_NAME)%"
-        user:           "%env(DATABASE_USER)%"
-        password:       "%env(DATABASE_PASSWORD)%"
-
-        driver:  pdo_mysql
+        path:           "/home/usgroup.loc/oleg.andreyev/src/api-a/database.sqlite"
+        driver:  pdo_sqlite
         charset: UTF8
 
     orm:

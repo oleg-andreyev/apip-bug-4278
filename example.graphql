@@ -1,0 +1,16 @@
+mutation SaveForLater($cart: InputCart!, $item_id: TargetItemId!) {
+    CreateFromCartSaveForLater(input: { cart: $cart, item_id: $item_id }) {
+        Cart {
+            id,
+            items {
+                id
+                variant_id
+                title
+            }
+        }
+        SaveForLater {
+            id,
+            title
+        }
+    }
+}

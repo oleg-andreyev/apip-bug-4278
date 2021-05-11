@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the Ecentria group, inc. software.
@@ -9,9 +9,7 @@
  * file that was distributed with this source code.
  */
 
-declare(strict_types=1);
-
-namespace DoctrineMigrations;
+namespace App\DoctrineMigrations;
 
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
