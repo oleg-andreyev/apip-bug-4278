@@ -1,14 +1,5 @@
 <?php declare(strict_types=1);
 
-/*
- * This file is part of the ecentria software.
- *
- * (c) 2020, ecentria, Inc
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace App;
 
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
@@ -16,11 +7,6 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
-/**
- * Kernel
- *
- * @author Sergey Chernecov <sergey.chernecov@ecentria.com>
- */
 class Kernel extends BaseKernel
 {
     use MicroKernelTrait;
