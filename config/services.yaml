@@ -11,19 +11,19 @@ services:
     autowire: true      # Automatically injects dependencies in your services.
     autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
-  "api_platform.graphql.resolver.stage.serialize":
-    class: App\GraphQl\Resolver\Stage\SerializeStage
-    arguments:
-      - "@api_platform.metadata.resource.metadata_factory"
-      - "@serializer"
-      - "@api_platform.graphql.serializer.context_builder"
-      - "@api_platform.pagination"
-
-  api_platform.graphql.serializer.context_builder:
-    class: App\GraphQl\Serializer\SerializerContextBuilder
-    arguments:
-      - "@api_platform.metadata.resource.metadata_factory"
-      - "@api_platform.name_converter"
+#  "api_platform.graphql.resolver.stage.serialize":
+#    class: App\GraphQl\Resolver\Stage\SerializeStage
+#    arguments:
+#      - "@api_platform.metadata.resource.metadata_factory"
+#      - "@serializer"
+#      - "@api_platform.graphql.serializer.context_builder"
+#      - "@api_platform.pagination"
+#
+#  "api_platform.graphql.serializer.context_builder":
+#    class: App\GraphQl\Serializer\SerializerContextBuilder
+#    arguments:
+#      - "@api_platform.metadata.resource.metadata_factory"
+#      - "@api_platform.name_converter"
 
   App\GraphQl\Serializer\SaveForLaterContextBuilder:
     decorates: 'api_platform.graphql.serializer.context_builder'

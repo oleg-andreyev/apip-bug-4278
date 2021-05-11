@@ -1,11 +1,5 @@
-# curl 'http://api-a.oleg-andreyev.exp-2.dev.ecentria.tools/api/graphql'
-#  -H 'accept: */*'
-#  -H 'Referer: http://api-a.oleg-andreyev.exp-2.dev.ecentria.tools/api/graphql/graphql_playground'
-#  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36 Edg/90.0.818.56'
-#  -H 'content-type: application/json'
-POST http://api-a.oleg-andreyev.exp-2.dev.ecentria.tools/api/graphql
-accept: */*
-Referer: http://api-a.oleg-andreyev.exp-2.dev.ecentria.tools/api/graphql/graphql_playground
+POST https://{{host}}/api/graphql
+Accept: */*
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36 Edg/90.0.818.56
 Content-Type: application/json
 
